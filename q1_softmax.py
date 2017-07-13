@@ -32,15 +32,17 @@ def softmax(x):
         # Matrix
         ### YOUR CODE HERE
         x -= np.max(x, axis=1)[np.newaxis, :].T
-        suma = np.sum(np.exp(x), axis=1)
-        return np.divide(np.exp(x), suma)
+        x = np.exp(x)
+        suma = np.sum(x, axis=1)
+        x /= suma[:, np.newaxis]
         ### END YOUR CODE
     else:
         # Vector
         ### YOUR CODE HERE
         x -= x.max()
-        suma = np.sum(np.exp(x))
-        return np.divide(np.exp(x), suma)
+        x = np.exp(x)
+        suma = np.sum(x)
+        x /= suma
         ### END YOUR CODE
 
     assert x.shape == orig_shape
